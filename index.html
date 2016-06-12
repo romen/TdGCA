@@ -2,6 +2,41 @@
 layout: default
 ---
 
+<div id="table">
+    <table id="giochi_table">
+        <thead>
+            <th>Titolo</th>
+            <th>Custode</th>
+            <th>Provenienza</th>
+            <th>Note</th>
+            <th data-dynatable-column="data_acquisizione">Data Acquisizione</th>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+
+<script>
+    $( document ).ready(function() {
+        firebase.database().ref("/tsst/giochi").once("value").then(function(data){
+            var myRecords = [];
+            data.forEach(function(dataChild){
+                myRecords.push(dataChild.val());
+            });
+
+            console.log(myRecords);
+            $("#giochi_table").dynatable({
+                dataset: {
+                    records: myRecords
+                },
+                features: {
+                    paginate: false
+                }
+            });
+        });
+    });
+</script>
+
+<!--
 <div class="posts">
   {% for post in site.posts %}
     <article class="post">
@@ -16,3 +51,4 @@ layout: default
     </article>
   {% endfor %}
 </div>
+-->
