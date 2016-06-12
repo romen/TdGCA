@@ -33,8 +33,12 @@ layout: default
                     paginate: false
                 }
             });
+
             var dynatable = $('#giochi_table').data('dynatable');
-            dynatable.dom.update();
+
+            dynatable.settings.dataset.originalRecords=myRecords;
+            dynatable.settings.dataset.records=null;
+            dynatable.process(true);
         };
         firebase.database().ref("/tsst/giochi").on("value",populateTable);
     });
