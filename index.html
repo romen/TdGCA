@@ -17,7 +17,7 @@ layout: default
 
 <script>
     $( document ).ready(function() {
-        firebase.database().ref("/tsst/giochi").once("value").then(function(data){
+        firebase.database().ref("/tsst/giochi").on("value").then(function(data){
             var myRecords = [];
             data.forEach(function(dataChild){
                 myRecords.push(dataChild.val());
